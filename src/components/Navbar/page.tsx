@@ -169,7 +169,7 @@ export default function Navbar() {
 
               {/* Flyout menus */}
               <PopoverGroup className="hidden lg:ml-8 lg:block lg:self-stretch">
-                <div className="flex h-full space-x-8">
+                <div className="flex h-full space-x-8 gap-2">
                   {cmcTypeList.categories.map((category) => (
                     <Popover key={category.name} className="flex">
                       <div className="relative flex">
@@ -226,7 +226,7 @@ export default function Navbar() {
                                       {section.items.map((item) => (
                                         <li
                                           key={item.name}
-                                          className="flex hover:bg-gray-300 box-border p-2 rounded-md"
+                                          className="flex hover:bg-gray-100 box-border p-2 rounded-md"
                                         >
                                           <Image
                                             src={item.imageSrc || ""}

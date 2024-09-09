@@ -35,28 +35,30 @@ export const cmcTypeList = {
               ],
             },
             {
-              id: "accessories",
-              name: "Accessories",
+              id: "papan peringkat",
+              name: "Papan Peringkat",
               items: [
-                { name: "Watches", href: "#" },
-                { name: "Wallets", href: "#" },
-                { name: "Bags", href: "#" },
-                { name: "Sunglasses", href: "#" },
-                { name: "Hats", href: "#" },
-                { name: "Belts", href: "#" },
+                { name: "Trending", href: "#", imageSrc: "https://s2.coinmarketcap.com/static/cloud/img/menu/MenuTrendingIcon.svg", },
+                { name: "Yang akan datang", href: "#", imageSrc: "https://s2.coinmarketcap.com/static/cloud/img/menu/MenuUpcomingIconV2.svg", },
+                { name: "Baru Ditambahkan", href: "#", imageSrc: "https://s2.coinmarketcap.com/static/cloud/img/menu/MenuRecentlyAddedIcon.svg",},
+                { name: "Kenaikan & Penurunan", href: "#", imageSrc: "https://s2.coinmarketcap.com/static/cloud/img/menu/MenuGainersLosersIcon.svg",},
+                { name: "Paling Sering Dikunjungi", href: "#", imageSrc: "https://s2.coinmarketcap.com/static/cloud/img/menu/MenuMostVisited.svg" },
               ],
             },
             {
-              id: "brands",
-              name: "Brands",
+              id: "NFT",
+              name: "NFT",
               items: [
-                { name: "Full Nelson", href: "#" },
-                { name: "My Way", href: "#" },
-                { name: "Re-Arranged", href: "#" },
-                { name: "Counterfeit", href: "#" },
-                { name: "Significant Other", href: "#" },
+                { name: "Statistik NFT Keseluruhan", href: "#", imageSrc: "https://s2.coinmarketcap.com/static/cloud/img/menu/MenuNFTOverviewV2.svg" },
               ],
             },
+            {
+              id: "On Chain Data",
+              name: "On Chain Data",
+              items: [
+                { name: "Pasangan Dex", href: "#", imageSrc: "https://s2.coinmarketcap.com/static/cloud/img/menu/MenuDexPairsIcon.svg" },
+              ]
+            }
           ],
         },
         {
