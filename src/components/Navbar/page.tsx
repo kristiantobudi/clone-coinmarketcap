@@ -77,20 +77,6 @@ export default function Navbar() {
                     key={category.name}
                     className="space-y-10 px-4 pb-8 pt-10"
                   >
-                    <div className="grid grid-cols-2 gap-x-4">
-                      {category.featured.map((item) => (
-                        <div key={item.name} className="group relative text-sm">
-                          <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
-                            <Image
-                              alt={item.imageAlt}
-                              src={item.imageSrc}
-                              className="object-cover object-center"
-                              fill
-                            />
-                          </div>
-                        </div>
-                      ))}
-                    </div>
                     {category.sections.map((section) => (
                       <div key={section.name}>
                         <p
@@ -140,10 +126,9 @@ export default function Navbar() {
 
       <header className="relative bg-white">
         <AnnouncementBar />
-
         <nav
           aria-label="Top"
-          className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
+          className="mx-auto max-w-full px-4 sm:px-6 lg:px-8"
         >
           <div className="border-b border-gray-200">
             <div className="flex h-16 items-center">
@@ -180,7 +165,7 @@ export default function Navbar() {
 
                       <PopoverPanel
                         transition
-                        className="absolute inset-x-0 top-full text-sm text-gray-500 transition data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in"
+                        className="absolute flex top-full text-sm text-gray-500 transition data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in"
                       >
                         {/* Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow */}
                         <div
@@ -188,65 +173,45 @@ export default function Navbar() {
                           className="absolute inset-0 top-1/2 bg-white shadow"
                         />
 
-                        <div className="relative bg-white">
-                          <div className="mx-auto max-w-7xl px-8">
-                            <div className="grid grid-cols-2 gap-x-8 gap-y-10 py-16">
-                              <div className="col-start-2 grid grid-cols-2 gap-x-8">
-                                {category.featured.map((item) => (
-                                  <div
-                                    key={item.name}
-                                    className="group relative text-base sm:text-sm"
+                        <div className="relative max-w-3xl bg-white rounded-lg shadow">
+                          <div className="mx-auto px-8 ml-3.5 mt-2">
+                            <div className="row-start-1 grid grid-cols-2 gap-x-8 gap-y-10 text-sm">
+                              {category.sections.map((section) => (
+                                <div key={section.name}>
+                                  <p
+                                    id={`${section.name}-heading`}
+                                    className="font-medium text-gray-400"
                                   >
-                                    <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
-                                      <Image
-                                        alt={item.imageAlt}
-                                        src={item.imageSrc}
-                                        className="object-cover object-center"
-                                        width={20}
-                                        height={15}
-                                      />
-                                    </div>
-                                  </div>
-                                ))}
-                              </div>
-                              <div className="row-start-1 grid grid-cols-3 gap-x-8 gap-y-10 text-sm">
-                                {category.sections.map((section) => (
-                                  <div key={section.name}>
-                                    <p
-                                      id={`${section.name}-heading`}
-                                      className="font-medium text-gray-400"
-                                    >
-                                      {section.name}
-                                    </p>
-                                    <ul
-                                      role="list"
-                                      aria-labelledby={`${section.name}-heading`}
-                                      className="mt-6 space-y-6 sm:mt-4 sm:space-y-4"
-                                    >
-                                      {section.items.map((item) => (
-                                        <li
-                                          key={item.name}
-                                          className="flex hover:bg-gray-100 box-border p-2 rounded-md"
+                                    {section.name}
+                                  </p>
+                                  <ul
+                                    role="list"
+                                    aria-labelledby={`${section.name}-heading`}
+                                    className="mt-4 space-y-4 sm:mt-2 sm:space-y-2"
+                                  >
+                                    {section.items.map((item) => (
+                                      <li
+                                        key={item.name}
+                                        className="flex hover:bg-gray-100 box-border p-2 rounded-md"
+                                      >
+                                        <Image
+                                          src={item.imageSrc || ""}
+                                          alt="CoinMarketCap"
+                                          className="h-6 w-6 flex-none mr-2"
+                                          width={20}
+                                          height={15}
+                                        />
+                                        <a
+                                          href={item.href}
+                                          className="hover:text-gray-800"
                                         >
-                                          <Image
-                                            src={item.imageSrc || ""}
-                                            alt="CoinMarketCap"
-                                            className="h-6 w-6 flex-none mr-2"
-                                            width={20}
-                                            height={15}
-                                          />
-                                          <a
-                                            href={item.href}
-                                            className="hover:text-gray-800"
-                                          >
-                                            {item.name}
-                                          </a>
-                                        </li>
-                                      ))}
-                                    </ul>
-                                  </div>
-                                ))}
-                              </div>
+                                          {item.name}
+                                        </a>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </div>
+                              ))}
                             </div>
                           </div>
                         </div>
