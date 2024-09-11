@@ -22,9 +22,9 @@ import {
 } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import { cmcTypeList } from "@/types/cmcType";
-import AnnouncementBar from "./Announcement/AnnouncementBar";
+import AnnouncementBar from "../Announcement/AnnouncementBar";
 
-export default function Navbar() {
+export default function Navigation() {
   const [open, setOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -107,19 +107,6 @@ export default function Navbar() {
                 ))}
               </TabPanels>
             </TabGroup>
-
-            <div className="space-y-6 border-t border-gray-200 px-4 py-6">
-              {cmcTypeList.pages.map((page) => (
-                <div key={page.name} className="flow-root">
-                  <a
-                    href={page.href}
-                    className="-m-2 block p-2 font-medium text-gray-900"
-                  >
-                    {page.name}
-                  </a>
-                </div>
-              ))}
-            </div>
           </DialogPanel>
         </div>
       </Dialog>
@@ -153,7 +140,7 @@ export default function Navbar() {
               </div>
 
               {/* Flyout menus */}
-              <PopoverGroup className="hidden lg:ml-8 lg:block lg:self-stretch">
+              <PopoverGroup className="hidden lg:block lg:self-stretch">
                 <div className="flex h-full space-x-8 gap-2">
                   {cmcTypeList.categories.map((category) => (
                     <Popover key={category.name} className="flex">
@@ -175,7 +162,7 @@ export default function Navbar() {
 
                         <div className="relative max-w-3xl bg-white rounded-lg shadow">
                           <div className="mx-auto px-8 ml-3.5 mt-2">
-                            <div className="row-start-1 grid grid-cols-2 gap-x-8 gap-y-10 text-sm">
+                            <div className="row-start-1 grid grid-cols-2 gap-x-6 gap-y-8 text-sm">
                               {category.sections.map((section) => (
                                 <div key={section.name}>
                                   <p
@@ -217,16 +204,6 @@ export default function Navbar() {
                         </div>
                       </PopoverPanel>
                     </Popover>
-                  ))}
-
-                  {cmcTypeList.pages.map((page) => (
-                    <a
-                      key={page.name}
-                      href={page.href}
-                      className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
-                    >
-                      {page.name}
-                    </a>
                   ))}
                 </div>
               </PopoverGroup>

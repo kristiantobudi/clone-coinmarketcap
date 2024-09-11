@@ -83,9 +83,47 @@ export const cmcTypeList = {
             },
           ],
         },
-      ],
-      pages: [
-        { name: "Company", href: "#" },
-        { name: "Stores", href: "#" },
+        {
+          id: "products",
+          name: "Products",
+          sections: [
+            {
+              id: "products",
+              name: "Products",
+              items: [
+                { name: "Converter", href: "#", imageSrc: "https://s2.coinmarketcap.com/static/cloud/img/menu/MenuConverterIcon.svg" },
+                { name: "Newsletter", href: "#", imageSrc: "https://s2.coinmarketcap.com/static/cloud/img/menu/MenuNewsIcon.svg" },
+                { name: "CMC Labs", href: "#", imageSrc: "https://s2.coinmarketcap.com/static/cloud/img/menu/MenuExplorerIcon.svg" },
+                { name: "Telegram Bot", href: "#", imageSrc: "https://s2.coinmarketcap.com/static/cloud/img/menu/MenuTelegramBotIcon.svg" },
+                { name: "Advertise", href: "#", imageSrc: "https://s2.coinmarketcap.com/static/cloud/img/menu/MenuAdvertiseIcon.svg" },
+              ],
+            },
+            {
+              id: "campaigns",
+              name: "Campaigns",
+              items: [
+                { name: "Airdrops", href: "#", imageSrc: "https://s2.coinmarketcap.com/static/cloud/img/menu/MenuAirdropsIcon.svg" },
+                { name: "Diamond Rewards", href: "#", imageSrc: "https://s2.coinmarketcap.com/static/cloud/img/menu/MenuRewardsIcon.svg" },
+                { name: "Learn & Earn", href: "#", imageSrc: "https://s2.coinmarketcap.com/static/cloud/img/menu/MenuEarnCryptoIcon.svg" },
+              ],
+            },
+            {
+              id: "",
+              name: "",
+              items: [
+                { name: "Crypto API", href: "#", imageSrc: "https://s2.coinmarketcap.com/static/cloud/img/menu/MenuCryptoApiIcon.light.svg" },
+                { name: "Widget Sites", href: "#", imageSrc: "https://s2.coinmarketcap.com/static/cloud/img/menu/MenuWidgetsIcon.light.svg" },
+              ],
+            },
+            {
+              id: "calender",
+              name: "Calender",
+              items: [
+                { name: "ICO Calender", href: "#", imageSrc: "https://s2.coinmarketcap.com/static/cloud/img/menu/MenuICOIcon.svg" },
+                { name: "Event Calender", href: "#", imageSrc: "https://s2.coinmarketcap.com/static/cloud/img/menu/MenuEvents2Icon.svg" },
+              ],
+            },
+          ],
+        },
       ],
 }
