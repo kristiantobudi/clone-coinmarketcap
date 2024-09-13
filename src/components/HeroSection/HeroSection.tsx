@@ -1,17 +1,15 @@
+import { HandleCustom } from "@/hooks/handleCustom";
 import Link from "next/link";
-import { useState } from "react";
+import Card from "../Card/Card";
+import ListCrypto from "../ListCrypto/ListCrypto";
 
 export default function HeroSection() {
-  const [checked, setChecked] = useState(false);
-
-  const handleToggle = () => {
-    setChecked(!checked);
-  };
+  const { checked, handleToggle } = HandleCustom();
 
   return (
-    <section className="bg-white dark:bg-gray-900">
+    <section className="bg-white dark:bg-gray-900 z-0">
       <div className="flex justify-between">
-        <div className="py-8 px-4 mx-auto max-w-screen-xl text-start justify-start lg:py-16">
+        <div className="py-8 px-4 mx-auto max-w-screen-xl text-start justify-start lg:py-12">
           <p className="mb-1 text-sm font-bold tracking-tight leading-none text-gray-900 md:text-xl lg:text-2xl dark:text-white">
             Harga Cryptocurrency Hari Ini berdasarkan Kapitalisasi Pasar
           </p>
@@ -24,11 +22,10 @@ export default function HeroSection() {
             </Link>
           </p>
         </div>
-        <div className="py-8 px-4 mx-auto max-w-screen-xl text-start justify-start lg:py-16">
+        <div className="py-8 px-4 mx-auto max-w-screen-xl text-start justify-start lg:py-12">
           <label className="inline-flex items-center cursor-pointer">
             <input
               type="checkbox"
-              checked={checked}
               onChange={handleToggle}
               className="sr-only peer"
             />
@@ -39,6 +36,8 @@ export default function HeroSection() {
           </label>
         </div>
       </div>
+      {checked && <Card />}
+      <ListCrypto />
     </section>
   );
 }

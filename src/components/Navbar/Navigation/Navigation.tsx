@@ -34,7 +34,7 @@ export default function Navigation() {
   return (
     <div className="bg-white">
       {/* Mobile menu */}
-      <Dialog open={open} onClose={setOpen} className="relative z-40 lg:hidden">
+      <Dialog open={open} onClose={setOpen} className="relative lg:hidden">
         <DialogBackdrop
           transition
           className="fixed inset-0 bg-black bg-opacity-25 transition-opacity duration-300 ease-linear data-[closed]:opacity-0"
@@ -111,7 +111,7 @@ export default function Navigation() {
         </div>
       </Dialog>
 
-      <header className="relative bg-white">
+      <header className="relative bg-white z-40">
         <AnnouncementBar />
         <nav
           aria-label="Top"
