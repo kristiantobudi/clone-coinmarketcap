@@ -8,6 +8,11 @@ export const CmcTableCryptoList = createContext({
 
 export const useGetCrypto = () => {
     const [data, setData] = useState<TableType>()
+    const [isloading, setIsLoading] = useState(true)
+
+    const isLoading = () => {
+        setIsLoading(!isloading)
+    }
 
     const fetchData = useCallback(async () => {
         try{
@@ -25,6 +30,7 @@ export const useGetCrypto = () => {
     }, [fetchData])
 
     return {
-        cmcTypeListData: data
+        cmcTypeListData: data,
+        isLoading
     }
 }

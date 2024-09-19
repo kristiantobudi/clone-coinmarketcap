@@ -1,7 +1,7 @@
 export interface CMCtableType {
     starNum?: string;
     coinName?: number;
-    coinIcon?: string;
+    coinIcon?: string | number;
     coinSymbol?: string;
     showBuy?: boolean
     price?: number;

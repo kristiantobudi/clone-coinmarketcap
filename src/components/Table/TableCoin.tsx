@@ -2,15 +2,16 @@ import { useGetCrypto } from "@/hooks/useGetCrypto";
 import { TableType } from "@/types/cmcTableType";
 import { titleAllTableType } from "@/types/titleAllTable";
 import { TableRow } from "./TableRow";
+import Pagination from "./Pagination";
 
 export default function ListCoin() {
   const { cmcTypeListData } = useGetCrypto();
   return (
-    <div className="overflow-x-auto w-full flex flex-row items-center justify-between lg:px-6">
-      <div>
+    <div className="w-full">
+      <div className="overflow-x-auto w-full flex flex-row items-center justify-between lg:px-6">
         <table
           id="sorting-table"
-          className="w-full table-fixed text-sm text-left text-gray-700"
+          className="min-w-full divide-y divide-gray-200"
         >
           <thead>
             <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
@@ -21,7 +22,8 @@ export default function ListCoin() {
               ))}
             </tr>
           </thead>
-          {cmcTypeListData && Array.isArray(cmcTypeListData) ? (
+          {cmcTypeListData &&
+            Array.isArray(cmcTypeListData) &&
             cmcTypeListData
               .slice(0, 10)
               .map((crypto: TableType, key: number) => (
@@ -29,7 +31,7 @@ export default function ListCoin() {
                   key={key}
                   starNum={crypto.name}
                   coinName={crypto.cmc_rank}
-                  coinSymbol={crypto.symbol}
+                  coinIcon={crypto.cmc_rank}
                   hRate={crypto.quote?.USD?.percent_change_1h}
                   dRate={crypto.quote?.USD?.percent_change_24h}
                   wRate={crypto.quote?.USD?.percent_change_7d}
@@ -48,16 +50,10 @@ export default function ListCoin() {
                   volumeValue={crypto.total_supply}
                   circulatingSupply={crypto.circulating_supply}
                 />
-              ))
-          ) : (
-            <tr>
-              <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                Loading...
-              </td>
-            </tr>
-          )}
+              ))}
         </table>
       </div>
+      <Pagination />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Star } from "../../../public/svg/starOutline";
 import { CoinNameRow } from "./CoinNameRow";
 import { Rate } from "../../../public/svg/rate";
@@ -6,9 +6,15 @@ import { More } from "../../../public/svg/moreOutline";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { CMCtableType } from "@/types/cmcTableRow";
+import dynamic from "next/dynamic";
+import SkeletonLoader from "../Skeleton/SkeletonLoader";
+
+const SkeletonLoading = dynamic(() => import("../Skeleton/SkeletonLoader"), {
+  loading: () => <SkeletonLoader />,
+});
 
 export const TableRow: React.FC<CMCtableType> = ({
-  starNum,
+  starNum = "",
   coinName = "",
   coinIcon = "",
   coinSymbol = "",
@@ -39,6 +45,14 @@ export const TableRow: React.FC<CMCtableType> = ({
     "https://s3.coinmarketcap.com/generated/sparklines/web/7d/2781/7653.svg",
   ];
 
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+  }, []);
+
   const getRandomGraph = (): string => {
     const rndInt = Math.floor(Math.random() * graphImage.length);
     return graphImage[rndInt];
@@ -62,77 +76,91 @@ export const TableRow: React.FC<CMCtableType> = ({
   };
 
   return (
-    <tbody className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-      <tr className="flex-auto w-full">
-        <td className="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-          {/* Star Icon */}
-          <div className="mr-3">
-            <Star />
-          </div>
-          {coinName && (
-            <CoinNameRow
-              name={coinName}
-              icon={coinIcon}
-              clicked={viewCoinDetails}
+    <tbody className="relative">
+      {isLoading ? (
+        <SkeletonLoading />
+      ) : (
+        <tr>
+          {/* Star Icon and Coin Icon */}
+          <td className="flex items-center px-4 py-2 lg:px-6 lg:py-4 font-medium text-gray-900 whitespace-nowrap">
+            <div className="mr-3">
+              <Star />
+            </div>
+            {coinIcon}
+          </td>
+
+          {/* Coin Name */}
+          <td className="px-4 py-2 lg:px-6 lg:py-4 font-medium text-gray-900 whitespace-nowrap text-sm">
+            {coinName && (
+              <CoinNameRow
+                name={starNum}
+                icon={coinIcon}
+                clicked={viewCoinDetails}
+              />
+            )}
+          </td>
+
+          {/* Price */}
+          <td
+            className="px-4 py-2 lg:px-6 lg:py-4 font-medium text-gray-900 whitespace-nowrap text-sm cursor-pointer"
+            onClick={viewPrice}
+          >
+            <p>${formatNumber(price)}</p>
+          </td>
+
+          {/* Hourly Rate */}
+          <td className="px-4 py-2 lg:px-6 lg:py-4">
+            <Rate
+              isIncrement={hRateIsIncrement}
+              rate={`${formatNumber(hRate)}%`}
             />
-          )}
-        </td>
-        {/* Star Number */}
-        <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap text-sm">
-          {starNum}
-        </td>
-        {/* Price */}
-        <td
-          className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap cursor-pointer text-sm"
-          onClick={viewPrice}
-        >
-          <p>${formatNumber(price)}</p>
-        </td>
-        {/* Hourly Rate */}
-        <td className="px-6 py-4">
-          <Rate
-            isIncrement={hRateIsIncrement}
-            rate={`${formatNumber(hRate)}%`}
-          />
-        </td>
-        {/* Daily Rate */}
-        <td className="px-6 py-4">
-          <Rate
-            isIncrement={dRateIsIncrement}
-            rate={`${formatNumber(dRate)}%`}
-          />
-        </td>
-        {/* Weekly Rate */}
-        <td className="px-6 py-4">
-          <Rate
-            isIncrement={wRateIsIncrement}
-            rate={`${formatNumber(wRate)}%`}
-          />
-        </td>
-        {/* Market Cap */}
-        <td className="px-0 py-4 font-medium text-gray-900 whitespace-nowrap">
-          <p>${formatNumber(marketCapValue)}</p>
-        </td>
-        {/* Volume */}
-        <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-          <p>
-            {formatNumber(volumeCryptoValue)} {coinSymbol}
-          </p>
-          <p className="text-gray-400">{formatNumber(volumeValue)}</p>
-        </td>
-        {/* Circulating Supply */}
-        <td className="px-12 py-4 font-medium text-gray-900 whitespace-nowrap">
-          <p>{formatNumber(circulatingSupply)}</p>
-        </td>
-        {/* Graph Image */}
-        <td className="px-6 py-4">
-          <Image src={getRandomGraph()} width={150} height={60} alt="Graph" />
-        </td>
-        {/* More Options */}
-        <td className="px-6 py-4">
-          <More />
-        </td>
-      </tr>
+          </td>
+
+          {/* Daily Rate */}
+          <td className="px-4 py-2 lg:px-6 lg:py-4">
+            <Rate
+              isIncrement={dRateIsIncrement}
+              rate={`${formatNumber(dRate)}%`}
+            />
+          </td>
+
+          {/* Weekly Rate */}
+          <td className="px-4 py-2 lg:px-6 lg:py-4">
+            <Rate
+              isIncrement={wRateIsIncrement}
+              rate={`${formatNumber(wRate)}%`}
+            />
+          </td>
+
+          {/* Market Cap */}
+          <td className="px-4 py-2 lg:px-6 lg:py-4 font-medium text-gray-900 whitespace-nowrap">
+            <p>${formatNumber(marketCapValue)}</p>
+          </td>
+
+          {/* Volume */}
+          <td className="px-4 py-2 lg:px-6 lg:py-4 font-medium text-gray-900 whitespace-nowrap">
+            <p>
+              {formatNumber(volumeCryptoValue)} {coinSymbol}
+            </p>
+            <p className="text-gray-400">{formatNumber(volumeValue)}</p>
+          </td>
+
+          {/* Circulating Supply */}
+          <td className="px-4 py-2 lg:px-6 lg:py-4 font-medium text-gray-900 whitespace-nowrap">
+            <p>{formatNumber(circulatingSupply)}</p>
+          </td>
+
+          {/* Graph Image */}
+          <td className="px-4 py-2 lg:px-6 lg:py-4">
+            <Image src={getRandomGraph()} width={150} height={60} alt="Graph" />
+          </td>
+
+          {/* More Options */}
+          <td className="px-4 py-2 lg:px-6 lg:py-4">
+            <More />
+          </td>
+        </tr>
+      )}
     </tbody>
   );
 };
